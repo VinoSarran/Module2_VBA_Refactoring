@@ -7,17 +7,19 @@
 
 ## Results:
 
-- The original version of this tool leveraged fairly common practice of establishing an array as a list then cycling through each cell within the specified range.  The original design read and evalauted each row flipping back and forth from the source data to the output table.  A loop has created for each ticker and result was printed after each loop:  
+- The original version of this tool leveraged fairly common practice of establishing an array as a list then cycling through each cell within the specified range. The original design read and evaluated each row flipping back and forth from the source data to the output table. A loop has created for each ticker and result was printed after each loop:  
+            
             For i = 0 To 11
             ticker = tickers(i)
             
-    Using total volume as example, we can see the straigtforward logic to evalaute the initial row compared to the which ticker in the index was being evaluated and complete the task once the ticker changed:
+  Using total volume as example, we can see the straightforward logic to evaluate the initial row compared to the which ticker in the index was being evaluated and      complete the task once the ticker changed:
         
             If Cells(j, 1).Value = ticker Then
             totalvolume = totalvolume + Cells(j, 8).Value
             End If 
 
-    This original methodolgy produced a runtime of:
+    This original methodology produced a runtime of:
+    
     <br>
 ![model](https://github.com/VinoSarran/Module2_VBA_Refactoring/blob/8e88873fc9afbfe73676b5d4c0bd16003f6b8a72/VBA_Challenge_2018%20(2).png?raw=true)
 
@@ -30,7 +32,7 @@
             tickerVolumes(tickerindex) = tickerVolumes(tickerindex) + Cells(j, 8).Value
             End If
 
-   Once all the required calculations are made within memory, the version of the code simply copies the array output to the output cells on the worksheet.  This refractored verions has a runtime of:
+   Once all the required calculations are made within memory, the version of the code simply copies the array output to the output cells on the worksheet.  This refactored version has a runtime of:
        <br>
  ![alt text](https://github.com/VinoSarran/Module2_VBA_Refactoring/blob/8e88873fc9afbfe73676b5d4c0bd16003f6b8a72/VBA_Challenge_2018.png?raw=true)
 
@@ -41,6 +43,6 @@
 
 Now clients are able to step beyond the original scope of evaluating just Green stocks.  Benchmark stocks or even the entire market could be evaluated along side those Green Stocks.  
 
-The differences between the original analysis code and the refactored illustrate the versility available when building tools for end users.  Often times, we can get to the same end by many different means.  But to be successful, we must think about how a tool will be used and how its use could evolve.  One of the advantages of the code in its original state is its ease of use and the ability of minimally trained coders to alter the logic.  However, it did not run as effectively as possible.  Refractoring does often lead to efficenicy but a challenge is ensuring the code is still performing the same task and ensuring the logic has not changed.  Having the ability to compare both versions was essential.       
+The differences between the original analysis code and the refactored illustrate the versality available when building tools for end users.  Often times, we can get to the same end by many different means.  But to be successful, we must think about how a tool will be used and how its use could evolve.  One of the advantages of the code in its original state is its ease of use and the ability of minimally trained coders to alter the logic.  However, it did not run as effectively as possible.  Refracturing does often lead to efficiency but a challenge is ensuring the code is still performing the same task and ensuring the logic has not changed.  Having the ability to compare both versions was essential.       
  
-Ensuring the clients are able to evalute as much data as possible was crucial.  However, the VBA script is not fool proof.  This code relies heavily on the source data being properly sorted.  Tickers out of sequence will report incorrect information.  The refactoring exercise does not address this fault and end users may not be aware of this issue. 
+Ensuring the clients are able to evaluate as much data as possible was crucial.  However, the VBA script is not fool proof.  This code relies heavily on the source data being properly sorted.  Tickers out of sequence will report incorrect information.  The refactoring exercise does not address this fault and end users may not be aware of this issue. 
