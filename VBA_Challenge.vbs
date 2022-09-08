@@ -51,35 +51,40 @@ Sub AllStocksAnalysisRefactored()
 '2a) Create a for loop to initialize the tickerVolumes to zero.
         For i = 0 To 11
         tickerVolumes(tickerindex) = 0
-        
+        Next i
 '2b) Loop over all the rows in the spreadsheet.
-                 Worksheets(yearValue).Activate
-                 For j = 2 To RowCount
+        Worksheets(yearValue).Activate
+        For j = 2 To RowCount
 
 '3a) Increase volume for current ticker
-
-
-                    If Cells(j, 1).Value = tickers(tickerindex) Then
-                    tickerVolumes(tickerindex) = tickerVolumes(tickerindex) + Cells(j, 8).Value
-                    End If
- 
-                    If Cells(j - 1, 1).Value <> tickers(tickerindex) And Cells(j, 1).Value = tickers(tickerindex) Then
+            tickerVolumes(tickerindex) = tickerVolumes(tickerindex) + Cells(j, 8).Value
+        
+'                    If Cells(j, 1).Value = tickers(tickerindex) Then
+'                    tickerVolumes(tickerindex) = tickerVolumes(tickerindex) + Cells(j, 8).Value
+'                    End If
+'3b) Check if the current row is the first row with the selected tickerIndex.
+                    If Cells(j - 1, 1).Value <> tickers(tickerindex) Then
                     tickerStartingPrices(tickerindex) = Cells(j, 6).Value
                     End If
- 
-                    If Cells(j + 1, 1).Value <> tickers(tickerindex) And Cells(j, 1).Value = tickers(tickerindex) Then
+'3c) check if the current row is the last row with the selected ticker
+                    If Cells(j + 1, 1).Value <> tickers(tickerindex) Then
                     tickerEndingPrices(tickerindex) = Cells(j, 6).Value
+                    
+                    tickerindex = tickerindex + 1
+                    
                     End If
             
-                Next
+        Next j
                 
 '6.Output the data for the current ticker.
+        For i = 0 To 11
+            
             Worksheets("All Stocks Analysis").Activate
-            Cells(4 + i, 1).Value = tickers(tickerindex)
-            Cells(4 + i, 2).Value = tickerVolumes(tickerindex)
-            Cells(4 + i, 3).Value = tickerEndingPrices(tickerindex) / tickerStartingPrices(tickerindex) - 1
-            tickerindex = tickerindex + 1
-    Next
+            Cells(4 + i, 1).Value = tickers(i)
+            Cells(4 + i, 2).Value = tickerVolumes(i)
+            Cells(4 + i, 3).Value = tickerEndingPrices(i) / tickerStartingPrices(i) - 1
+            
+        Next i
     'Next
     'Formatting
     Worksheets("All Stocks Analysis").Activate
