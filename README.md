@@ -7,7 +7,7 @@
 
 ## Results:
 
-- The original version of this tool leveraged fairly common practice of establishing an array as a list then cycling through each cell within the specified range. The original design read and evaluated each row flipping back and forth from the source data to the output table. A loop has created for each ticker and result was printed after each loop:  
+- The original version of this tool leveraged fairly common practices of establishing an array as a list then cycling through each cell within the specified range. The original design read and evaluated each row flipping back and forth from the source data to the output table. A loop has created for each ticker and result was printed after each loop:  
             
             For i = 0 To 11
             ticker = tickers(i)
